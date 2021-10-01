@@ -1,11 +1,23 @@
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { Toolbar } from './components/Toolbar';
+import { ThemeContext, themes } from './ThemeContext';
+import { ThemedButton } from './components/ThemedButton';
 
 export default function App() {
+  const [theme, setTheme] = useState(themes.dark);
+  function toggleTheme() {
+    setTheme(theme === themes.dark ? themes.light : themes.dark);
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <ThemeContext.Provider value={{ theme: theme, toggleTheme: toggleTheme }}>
+        <Toolbar />
+      </ThemeContext.Provider>
+      <ThemedButton title="Fora" onPress={toggleTheme} />
       <StatusBar style="auto" />
     </View>
   );
