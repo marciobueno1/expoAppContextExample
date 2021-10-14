@@ -14,7 +14,7 @@ function isSameTheme(theme1, theme2) {
 }
 
 export const themeModel = {
-  mode: themes.light,
+  mode: themes.dark,
   toggle: action((state) => {
     state.mode = isSameTheme(state.mode, themes.light)
       ? themes.dark
