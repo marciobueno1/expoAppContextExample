@@ -4,6 +4,7 @@ import { StyleSheet, View, Button } from "react-native";
 
 import { Toolbar } from "../components/Toolbar";
 import { ThemedButton } from "../components/ThemedButton";
+import { routes } from "../navigation";
 
 export function HomeScreen({ navigation }) {
   const [viewVisible, setViewVisible] = useState(false);
@@ -16,7 +17,16 @@ export function HomeScreen({ navigation }) {
       <ThemedButton title="Fora" onPress={handleVisible} />
       <Button
         title="Go to Star Wars People"
-        onPress={() => navigation.navigate("People")}
+        onPress={() => navigation.navigate(routes.People)}
+      />
+      <Button
+        title="Home Screen Again..."
+        onPress={() => navigation.push(routes.Home)}
+      />
+      <Button title="Go Back..." onPress={() => navigation.goBack()} />
+      <Button
+        title="Go Back to first screen..."
+        onPress={() => navigation.popToTop()}
       />
       <StatusBar style="auto" />
     </View>

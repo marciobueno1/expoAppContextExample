@@ -1,4 +1,6 @@
 import { createStore } from "easy-peasy";
 import { storeModel } from "./storeModel";
 
-export const store = createStore(storeModel);
+const store = createStore(storeModel);
+
+export default store;
