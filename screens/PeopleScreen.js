@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 
 import { Person } from "../components/Person";
 
-export function PeopleScreen() {
+export function PeopleScreen({ navigation }) {
   const [currentPage, setCurrentPage] = useState(
     "https://swapi.dev/api/people/?page=1"
   );
@@ -17,12 +17,14 @@ export function PeopleScreen() {
   const handleNextBtPressed = () => {
     if (data.next) {
       setCurrentPage(data.next);
+      navigation.setOptions({ title: `People - pg ${data.next.substring(data.next.indexOf('=') + 1)}`})
     }
   };
 
   const handlePreviousBtPressed = () => {
     if (data.previous) {
       setCurrentPage(data.previous);
+      navigation.setOptions({ title: `People - pg ${data.previous.substring(data.previous.indexOf('=') + 1)}`})
     }
   };
 

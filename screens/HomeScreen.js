@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Button } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 import { Toolbar } from "../components/Toolbar";
 import { ThemedButton } from "../components/ThemedButton";
 import { routes } from "../navigation";
 
 export function HomeScreen({ navigation }) {
+  const [count, setCount] = React.useState(0);
   const [viewVisible, setViewVisible] = useState(false);
   const handleVisible = () => setViewVisible(!viewVisible);
 
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
+      <Text>Count: {count}</Text>
       <Toolbar />
       {viewVisible && <View style={styles.view} />}
       <ThemedButton title="Fora" onPress={handleVisible} />
@@ -21,7 +31,7 @@ export function HomeScreen({ navigation }) {
       />
       <Button
         title="Home Screen Again..."
-        onPress={() => navigation.push(routes.Home)}
+        onPress={() => navigation.push(routes.Home, { name: "Nome Recebido por Parâmetro" })}
       />
       <Button title="Go Back..." onPress={() => navigation.goBack()} />
       <Button
